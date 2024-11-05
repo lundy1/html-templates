@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        nav a:hover, nav a.selected {
+            background-color: #666;
+            color: white;
+        }
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 8px;
+        }
+        .profile-img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .portfolio-item {
+            margin-bottom: 20px;
+        }
+        .portfolio-item img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Name</h1>
+        <p>Interactive Resume</p>
+    </header>
+    <nav>
+        <a href="#profile" class="selected">Profile</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#portfolio">Portfolio</a>
+    </nav>
+    <main>
+        <section id="profile">
+            <h2>Profile</h2>
+            <img src="profile.jpg" alt="Your Profile Picture" class="profile-img">
+            <p>Brief introduction or summary about yourself.</p>
+        </section>
+        <section id="experience">
+            <h2>Experience</h2>
+            <p>Details of your work experience, including job titles, companies, and durations.</p>
+        </section>
+        <section id="skills">
+            <h2>Skills</h2>
+            <p>A list of your skills, such as programming languages, tools, and technologies.</p>
+        </section>
+        <section id="education">
+            <h2>Education</h2>
+            <p>Details of your educational background, including degrees and institutions.</p>
+        </section>
+        <section id="portfolio">
+            <h2>Portfolio</h2>
+            <div class="portfolio-item">
+                <h3>Project Title</h3>
+                <img src="project1.jpg" alt="Project 1">
+                <p>Description of the project and your contributions.</p>
+            </div>
+            <div class="portfolio-item">
+                <h3>Project Title</h3>
+                <img src="project2.jpg" alt="Project 2">
+                <p>Description of the project and your contributions.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('section');
+
+            function changeActiveLink() {
+                let index = sections.length;
+
+                while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
+
+                navLinks.forEach((link) => link.classList.remove('selected'));
+                navLinks[index].classList.add('selected');
+            }
+
+            changeActiveLink();
+            window.addEventListener('scroll', changeActiveLink);
+
+            navLinks.forEach((link) => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth',
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
